@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<script src="/static/js/main.js"></script>
+<h1>Sign In</h1>
+<form action="" method="POST" name="login">
+	{{ form.hidden_tag() }}
+	<p>Please enter your OpenID, or select one fo the providers below:</p>
+	<p>{{ form.openid(size=40) }}</p>
+	{% for error in form.openid.errors %}
+		<span style="color: red;">
+			[{{ error }}]
+		</span> 
+	{% endfor %}
+	{% for provider in providers %}
+		<a href="javascript:set_openid('{{ provider.url }}', '{{ provider.name }};')">{{ provider.name }}</a>
+	{% endfor %}
+
+	<p>{{ form.remember_me }} Remember Me</p>
+	<p><input type="submit" value="Sign In"></p>
+</form>
+{% endblock %}
