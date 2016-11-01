@@ -1,5 +1,6 @@
 import os
 from decouple import config
+from decouple import Csv
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,6 +23,15 @@ DEFAULT_DBURL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 SQLALCHEMY_DATABASE_URI = config('DATABASE_URL', default=DEFAULT_DBURL)
 SQLALCHEMY_MIGRATE_REPO = os.path.join(BASE_DIR, 'migrations')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+# Email configuration
+MAIL_SERVER = config('MAIL_SERVER')
+MAIL_PORT = config('MAIL_PORT', cast=int)
+MAIL_USERNAME = config('MAIL_USERNAME')
+MAIL_PASSWORD = config('MAIL_PASSWORD')
+
+# Administrator
+ADMINS = config('ADMINS', cast=Csv())
 
 # Open ID configuration
 OPENID_PROVIDERS = [
